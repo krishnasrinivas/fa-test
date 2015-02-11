@@ -1,0 +1,31 @@
+<div class="offering-create">
+  <h3 class="text-center">Create Offering</h3>
+  <form ng-submit="createOffering()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" ng-model="offering.name">
+    </div>
+    <div class="form-group">
+      <label>Desciption</label>
+      <input type="text" class="form-control" ng-model="offering.description">
+    </div>
+    <div class="form-group">
+      <label>amount</label>
+      <input type="text" class="form-control" ng-model="offering.amount">
+    </div>
+    <div class="form-group">
+      <label>Min amount</label>
+      <input type="text" class="form-control" ng-model="offering.min_amount">
+    </div>
+    <div class="form-group">
+      <label>Max amount</label>
+      <input type="text" class="form-control" ng-model="offering.max_amount">
+    </div>
+    <div class="form-group">
+      <label>escrow_term_days</label>
+      <input type="text" class="form-control" ng-model="offering.escrow_term_days">
+    </div>
+    <input type="submit" class="btn btn-primary pull-right" value="Submit">
+  </form>
+</div>
+<alert type="danger" close="closeAlert()" ng-show="alert.show">{{alert.msg}}</alert>

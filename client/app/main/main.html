@@ -1,0 +1,62 @@
+<div class="issuer-create">
+  <h3 class="text-center">Create Issuer</h3>
+  <form ng-submit="createIssuer()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" ng-model="issuer.name">
+    </div>
+    <div class="form-group">
+      <label>Executive name</label>
+      <input type="text" class="form-control" ng-model="issuer.executive_name">
+    </div>
+    <div class="form-group">
+      <label>Phone</label>
+      <input type="text" class="form-control" ng-model="issuer.phone">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" ng-model="issuer.email">
+    </div>
+    <div class="form-group">
+      <label>Tax ID Number</label>
+      <input type="text" class="form-control" ng-model="issuer.tax_id_number">
+    </div>
+    <div class="form-group">
+      <label>Type</label>
+      <select ng-model="issuer.type">
+        <option value="company">Company</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Street Address 1</label>
+      <input type="text" class="form-control" ng-model="issuer.street_address_1">
+    </div>
+    <div class="form-group">
+      <label>Street Address 2</label>
+      <input type="text" class="form-control" ng-model="issuer.street_address_2">
+    </div>
+    <div class="form-group">
+      <label>City</label>
+      <input type="text" class="form-control" ng-model="issuer.city">
+    </div>
+    <div class="form-group">
+      <label>State</label>
+      <input type="text" class="form-control" ng-model="issuer.region">
+    </div>
+    <div class="form-group">
+      <label>state where the company was formed</label>
+      <input type="text" class="form-control" ng-model="issuer.state_formed_in">
+    </div>
+    <div class="form-group">
+      <label>Postal code</label>
+      <input type="text" class="form-control" ng-model="issuer.postal_code">
+    </div>
+    <div class="form-group">
+      <label>Country</label>
+      <input type="text" class="form-control" ng-model="issuer.country">
+    </div>
+
+    <input type="submit" class="btn btn-primary pull-right" value="Submit">
+  </form>
+</div>
+<alert type="danger" close="closeAlert()" ng-show="alert.show">{{alert.msg}}</alert>
