@@ -121,7 +121,7 @@ var querystring = require('querystring');
         },
 
         create: function(data, cb){
-            _post('ach_tokens', data, cb);
+            _post('ach_authorizations', data, cb);
         }
     }
 

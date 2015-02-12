@@ -16,6 +16,15 @@ angular.module('faTestApp')
             console.log("error " + status);
           });
       },
+      createachauth: function (achauth, cbk) {
+        $http.post('/api/fa/ach_authorizations', achauth)
+          .success(function(data) {
+            cbk(data);
+          })
+          .error(function(data, status) {
+            console.log("error " + status);
+          });
+      },
       createOffering: function (offer, cbk) {
         $http.post('/api/fa/offerings', offer)
           .success(function(data) {

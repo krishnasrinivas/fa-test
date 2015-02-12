@@ -27,6 +27,12 @@ exports.createEntity = function(req, res) {
   });
 }
 
+exports.achAuthorizations = function(req, res) {
+  fa.ach.create(req.body, function() {
+    res.json(arguments);
+  });
+}
+
 exports.kycTokens = function(req, res) {
 	fa.kycToken.create(req.body, function() {
 		res.json(arguments);
