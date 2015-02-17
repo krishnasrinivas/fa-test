@@ -1,4 +1,3 @@
-//NG-AUxktDEAwDhalblv-o3CSbHJV7s6g
 var https = require('https');
 var querystring = require('querystring');
 
@@ -29,7 +28,7 @@ var querystring = require('querystring');
         return function(response){
             var str = '';
             var err = null;
-            err = response.statusCode >= 400 ? response.statusCode : 0;
+            err = response.statusCode >= 400 ? response.statusCode : null;
             response.on('data', function(chunk){
                 str += chunk;
             });
@@ -121,7 +120,7 @@ var querystring = require('querystring');
         },
 
         create: function(data, cb){
-            _post('ach_authorizations', data, cb);
+            _post('ach_tokens', data, cb);
         }
     }
 
@@ -336,5 +335,9 @@ var querystring = require('querystring');
         }
     }
 
+    // get bank info from routing number
+    FundAmerica.bankinfo = function(routingno, cb) {
+        _get('bank_info/' + routingno, cb);
+    }
 
 }).call(this);
