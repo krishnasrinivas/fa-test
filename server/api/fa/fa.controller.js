@@ -51,6 +51,13 @@ exports.getOffering = function(req, res) {
 	})
 }
 
+exports.bankinfo = function(req, res) {
+	fa.bankinfo(req.params.routing_number, function() {
+		console.log(arguments)
+		res.json(arguments);
+	})
+}
+
 exports.escrowAgreements = function(req, res) {
 	fa.escrowAgreements.create(req.body, function(err, data) {
 		fa.escrowServiceApplications.create({

@@ -1,0 +1,12 @@
+<alert type="danger" close="closeAlert()" ng-show="alert.show">{{alert.msg}}</alert>
+<alert type="success" ng-show="success.show">{{success.msg}}</alert>
+<div class="achauth-create">
+  <h3 class="text-center">Enter routing number</h3>
+  <form ng-submit="getbankinfo()">
+    <div class="form-group">
+      <label>routing_number</label>
+      <input type="text" class="form-control" ng-model="routing_number">
+    </div>
+    <input type="submit" class="btn btn-primary pull-right" value="Submit">
+  </form>
+</div>
