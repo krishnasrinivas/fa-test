@@ -278,6 +278,10 @@ var querystring = require('querystring');
 
         billingLogs: function(key, cb){
             _get('offerings/' + key + "/billing_logs", cb);
+        },
+
+        escrowLedger: function(key, cb) {
+            _get('offerings/' + key + '/escrow_ledger', cb);
         }
     }
 

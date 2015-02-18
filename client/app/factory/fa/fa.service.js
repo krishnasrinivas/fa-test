@@ -52,6 +52,15 @@ angular.module('faTestApp')
             console.log("error " + status);
           });
       },
+      escrowledger: function (id, cbk) {
+        $http.get('/api/fa/offerings/' + id + '/escrow_ledger')
+          .success(function(data) {
+            cbk(data);
+          })
+          .error(function(data, status) {
+            console.log("error " + status);
+          });
+      },
       getKycUrl: function(id, cbk) {
         $http.post('/api/fa/kyc_tokens', {entity_id:id})
           .success(function(data) {

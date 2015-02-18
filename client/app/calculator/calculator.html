@@ -1,0 +1,59 @@
+<div class="calculator row">
+  <h3 class="text-center">Calculator</h3>
+	<hr>
+	<div class="col-xs-4">
+    <div class="form-group">
+      <label>investmentAmount</label>
+      <input type="text" class="form-control" ng-model="calc.investmentAmount">
+    </div>
+    <div class="form-group">
+      <label>monthlyAreaSales</label>
+      <input type="text" class="form-control" ng-model="calc.monthlyAreaSales">
+    </div>
+    <div class="form-group">
+      <label>averageAreaPrice</label>
+      <input type="text" class="form-control" ng-model="calc.averageAreaPrice">
+    </div>
+    <div class="form-group">
+      <label>totalSellableArea</label>
+      <input type="text" class="form-control" ng-model="calc.totalSellableArea">
+    </div>
+    <div class="form-group">
+      <label>equityPool</label>
+      <input type="text" class="form-control" ng-model="calc.equityPool">
+    </div>
+	</div>
+	<div class="col-xs-4">
+    <div class="form-group">
+      <label>cashFlowStartYear</label>
+      <input type="text" class="form-control" ng-model="calc.cashFlowStartYear">
+    </div>
+    <div class="form-group">
+      <label>salesStartYear</label>
+      <input type="text" class="form-control" ng-model="calc.salesStartYear">
+    </div>
+    <div class="form-group">
+      <label>salesCost</label>
+      <input type="text" class="form-control" ng-model="calc.salesCost">
+    </div>
+    <div class="form-group">
+      <label>spvEquity</label>
+      <input type="text" class="form-control" ng-model="calc.spvEquity">
+    </div>
+    <div class="form-group">
+      <label>extraSpvCosts</label>
+      <input type="text" class="form-control" ng-model="calc.extraSpvCosts">
+    </div>
+    <div class="form-group">
+      <label>commisions</label>
+      <input type="text" class="form-control" ng-model="calc.commisions">
+    </div>
+	</div>
+	<div class="col-xs-4">
+		spvProceeds = {{ calc.spvEquity / calc.extraSpvCosts }}
+		<hr>
+		holdPeriod = {{  ((calc.salesStartYear - 1) + calc.totalSellableArea) / (calc.monthlyAreaSales * 12) }}
+		<hr>
+		investorsShare = {{ (calc.investmentAmount / calc.spvEquity) * (1 - calc.commisions)}}
+	</div>
+</div>

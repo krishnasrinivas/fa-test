@@ -51,6 +51,12 @@ exports.getOffering = function(req, res) {
 	})
 }
 
+exports.getEscrowLedger = function(req, res) {
+	fa.offerings.escrowLedger(req.params.id, function() {
+		res.json(arguments);
+	})
+}
+
 exports.bankinfo = function(req, res) {
 	fa.bankinfo(req.params.routing_number, function() {
 		res.json(arguments);

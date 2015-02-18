@@ -1,0 +1,53 @@
+<alert type="danger" close="closeAlert()" ng-show="alert.show">{{alert.msg}}</alert>
+<alert type="success" ng-show="success.show">{{success.msg}}</alert>
+<div class="achauth-create">
+  <h3 class="text-center">Escrow ledger</h3>
+  <form ng-submit="escrowledger()">
+    <div class="form-group">
+      <label>offering_id</label>
+      <input type="text" class="form-control" ng-model="offering_id">
+    </div>
+    <input type="submit" class="btn btn-primary pull-right" value="Submit">
+  </form>
+</div>
+
+<table class="table table-bordered">
+	<thead>
+	<tr>
+		<th>
+			Date
+		</th>
+		<th>
+			Description
+		</th>
+		<th>
+			Credit
+		</th>
+		<th>
+			Debit
+		</th>
+		<th>
+			Balance
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="resource in resources">
+		<td>
+			{{resource.created_at}}
+		</td>
+		<td>
+			{{resource.description}}
+		</td>
+		<td>
+			{{resource.credit}}
+		</td>
+		<td>
+			{{resource.debit}}
+		</td>
+		<td>
+			{{resource.balance}}
+		</td>
+	</tr>
+	</tbody>
+</table>
