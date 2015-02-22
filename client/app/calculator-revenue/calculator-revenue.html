@@ -22,3 +22,32 @@ Revenue = {{revenue()}}
 <hr>
 Profit = {{profit()}}
 </div>
+<hr class="clearboth">
+<div class="col-xs-6 col-xs-push-3 text-center">
+  <h3>Repayment details</h3>
+  <hr>
+  Payment per term = {{emi()}}
+  <hr>
+  Total payment = {{emi() * calc.terms}}
+  <hr>
+  Total Interest = {{totalInterest()}}
+  <hr>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Term Number</th>
+        <th>Principal</th>
+        <th>Interest</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in rows">
+        <td>{{row.termno}}</td>
+        <td>{{row.principal}}</td>
+        <td>{{row.interest}}</td>
+        <td>{{row.balance}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
