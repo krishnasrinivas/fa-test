@@ -34,10 +34,12 @@ angular.module('faTestApp')
             principal: Math.round((emi - balance*interestperterm)*100)/100,
             balance: Math.round((balance - (emi - balance*interestperterm))*100)/100
           }
+          balance = balance - obj.principal;
+          obj.totalpaid = $scope.calc.investmentAmount - balance;
+          obj.totalpaid = Math.round(obj.totalpaid*100)/100;
           if (obj.balance<0)
             obj.balance = 0;
           $scope.rows.push(obj);
-          balance = balance - obj.principal;
         }
       }
     );
