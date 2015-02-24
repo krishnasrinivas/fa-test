@@ -79,7 +79,7 @@ angular.module('faTestApp')
         var stack = d3.layout.stack();
         stack(dataset);
         var h = 600;
-        var w = 1200;
+        var w = 960;
         var xScale = d3.scale.ordinal()
           .domain(d3.range(dataset[0].length))
           .rangeRoundBands([0, w], 0.05);
