@@ -78,8 +78,9 @@ angular.module('faTestApp')
         dataset = [dataset2, dataset1];
         var stack = d3.layout.stack();
         stack(dataset);
-        var h = 600;
-        var w = 960;
+        var margin = {top: 30, right: 0, bottom: 30, left: 100};
+        var h = 600 - margin.top - margin.bottom;
+        var w = 960 - margin.right - margin.left;
         var xScale = d3.scale.ordinal()
           .domain(d3.range(dataset[0].length))
           .rangeRoundBands([0, w], 0.05);
@@ -105,8 +106,9 @@ angular.module('faTestApp')
         $('#chartid').html('');
         var svg = d3.select("#chartid")
             .append("svg")
-            .attr("width", w)
-            .attr("height", h);
+            // .style({background: 'grey'})
+            .attr("width", w + margin.right + margin.left)
+            .attr("height", h + margin.top + margin.bottom);
         svg.call(tip);
         svg.call(linetip);
         var colors = d3.scale.category10();
@@ -114,6 +116,7 @@ angular.module('faTestApp')
           .data(dataset)
           .enter()
           .append("g")
+          .attr('transform', 'translate('+margin.left+','+margin.top+')')
           .style("fill", function(d, i) {
             return colors(i);
           });
@@ -144,6 +147,7 @@ angular.module('faTestApp')
 
         svg.append('path')
           .attr('d', lineFunc(lineset))
+          .attr('transform', 'translate('+margin.left+','+margin.top+')')
           .attr('stroke', 'blue')
           .attr('stroke-width', 2)
           .attr('fill', 'none');
@@ -151,11 +155,53 @@ angular.module('faTestApp')
         svg.selectAll("dot")
           .data(lineset)
         .enter().append("circle")
+          .attr('transform', 'translate('+margin.left+','+margin.top+')')
           .attr("r", 3.5)
           .attr("cx", function(d) { return xScaleLine(d.x); })
           .attr("cy", function(d) { return h-yScaleLine(d.y); })
           .on("mouseover", linetip.show)
           .on("mouseout", linetip.hide);
+
+
+        var vGuide = d3.select('svg').append('g')
+        var vGuideScale = d3.scale.linear()
+          .domain([0, $scope.calc.investmentAmount])
+          .range([h, 0]);
+        var vAxis = d3.svg.axis()
+          .scale(vGuideScale)
+          .orient('left')
+          .ticks(10)
+
+
+        vAxis(vGuide);
+        vGuide.attr('transform', 'translate('+margin.left + ',' + margin.top + ')')
+        vGuide.selectAll('path')
+          .style({fill: 'none', stroke: '#000'})
+        vGuide.selectAll('line')
+          .style({stroke: '#000'})
+
+        var hGuide = d3.select('svg').append('g')
+        var hGuideScale = d3.scale.ordinal()
+          .domain(d3.range(1, lineset.length + 1))
+          .rangeRoundBands([0, w], 0.05);
+        var hAxis = d3.svg.axis()
+          .scale(hGuideScale)
+          .orient('bottom')
+          .tickValues(hGuideScale.domain().filter(function(d, i) {
+            if (lineset.length < 40)
+              return 1
+            else {
+              return !(i % Math.round(lineset.length/20))
+            }
+          }))
+
+        hAxis(hGuide);
+        var _h = margin.top + h;
+        hGuide.attr('transform', 'translate('+margin.left + ',' + _h + ')')
+        hGuide.selectAll('path')
+          .style({fill: 'none', stroke: '#000'})
+        hGuide.selectAll('line')
+          .style({stroke: '#000'})
       }
     );
   });
