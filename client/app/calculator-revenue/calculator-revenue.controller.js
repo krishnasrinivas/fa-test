@@ -26,8 +26,15 @@ angular.module('faTestApp')
       .attr('class', 'd3-tip')
       .offset([-10, 0])
       .html(function(d) {
-          return "<span style='color:red'>" + d.type + " " + d.y + "</span>"
+          return "<strong>" + d.type + ": </strong><span style='color:red'>" + d.y + "</span>"
       });
+    var linetip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(function(d) {
+          return "<strong>Balance: </strong><span style='color:red'>" + d.y + "</span>"
+      });
+
     $scope.$watch($scope.emi,
       function() {
         $scope.rows = [];
@@ -87,9 +94,9 @@ angular.module('faTestApp')
           ])
           .range([0, h]);
 
-        var xScaleLine = d3.scale.linear()
-          .domain([0, lineset.length-1])
-          .range([0+(w/(lineset.length*2)), w-(w/(lineset.length*2))]);
+        var xScaleLine = d3.scale.ordinal()
+          .domain(d3.range(dataset[0].length))
+          .rangeRoundBands([0+(w/(lineset.length*2)), w+(w/(lineset.length*2))], 0.05);
 
         var yScaleLine = d3.scale.linear()
           .domain([0, $scope.calc.investmentAmount])
@@ -101,6 +108,7 @@ angular.module('faTestApp')
             .attr("width", w)
             .attr("height", h);
         svg.call(tip);
+        svg.call(linetip);
         var colors = d3.scale.category10();
         var groups = svg.selectAll("g")
           .data(dataset)
@@ -127,7 +135,7 @@ angular.module('faTestApp')
           .on("mouseout", tip.hide)
 
         var lineFunc = d3.svg.line()
-          .x(function(d, i) {
+          .x(function(d) {
             return xScaleLine(d.x);
           })
           .y(function(d) {
@@ -139,6 +147,15 @@ angular.module('faTestApp')
           .attr('stroke', 'blue')
           .attr('stroke-width', 2)
           .attr('fill', 'none');
+
+        svg.selectAll("dot")
+          .data(lineset)
+        .enter().append("circle")
+          .attr("r", 3.5)
+          .attr("cx", function(d) { return xScaleLine(d.x); })
+          .attr("cy", function(d) { return h-yScaleLine(d.y); })
+          .on("mouseover", linetip.show)
+          .on("mouseout", linetip.hide);
       }
     );
   });
