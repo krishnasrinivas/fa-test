@@ -51,7 +51,12 @@ angular.module('faTestApp')
 
         var dataset1 = [];
         var dataset2 = [];
+        var lineset = [];
         for (var i = 0; i < $scope.rows.length; i++) {
+          lineset.push({
+            x: i,
+            y: $scope.rows[i].balance
+          })
           dataset1.push({
             x: i,
             y: $scope.rows[i].principal,
@@ -80,6 +85,14 @@ angular.module('faTestApp')
               });
             })
           ])
+          .range([0, h]);
+
+        var xScaleLine = d3.scale.linear()
+          .domain([0, lineset.length-1])
+          .range([0+(w/(lineset.length*2)), w-(w/(lineset.length*2))]);
+
+        var yScaleLine = d3.scale.linear()
+          .domain([0, $scope.calc.investmentAmount])
           .range([0, h]);
 
         $('#chartid').html('');
@@ -112,6 +125,20 @@ angular.module('faTestApp')
           .attr("width", xScale.rangeBand())
           .on("mouseover", tip.show)
           .on("mouseout", tip.hide)
+
+        var lineFunc = d3.svg.line()
+          .x(function(d, i) {
+            return xScaleLine(d.x);
+          })
+          .y(function(d) {
+            return h - yScaleLine(d.y);
+          })
+
+        svg.append('path')
+          .attr('d', lineFunc(lineset))
+          .attr('stroke', 'blue')
+          .attr('stroke-width', 2)
+          .attr('fill', 'none');
       }
     );
   });
